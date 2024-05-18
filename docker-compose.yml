@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # Database
+  db:
+    image: postgres:latest
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: '1234'
+    networks:
+      - pgsite
+
+  # pgadmin4
+  pg4:
+    depends_on:
+      - db
+    image: dpage/pgadmin4:latest
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'postgres@gmail.com'
+      PGADMIN_DEFAULT_PASSWORD: '1234'
+    networks:
+      - pgsite
+
+  # jupyter 
+  jupyter:
+    image: jupyter/scipy-notebook:latest
+    ports:
+      - "10000:8888"
+    volumes:
+      - ./notebooks:/home/jovyan/work
+    environment:
+      - JUPYTER_TOKEN=1234
+    depends_on:
+      - db
+      
+  # streamlit
+  streamlit:
+    image: python:3.8
+    command: bash -c "pip install -r requirements.txt && streamlit run app.py"
+    volumes:
+      - ./streamlit:/app
+    ports:
+      - "8501:8501"
+    depends_on:
+      - db
+    working_dir: /app
+
+  # mlflow
+  mlflow:
+    build: ./mlflow/
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlflow:/mlflow
+    depends_on:
+      - db
+
+networks:
+  pgsite:
+
+
+volumes:
+  db_data:

@@ -1,0 +1,29 @@
+-- Active: 1714220718919@@192.168.1.52@5432@dsi324_db
+
+SELECT * FROM academy;
+
+SELECT * FROM address_info;
+
+SELECT * FROM company;
+
+SELECT * FROM cooperative_student_questionnaire;
+
+SELECT * FROM officer;
+
+SELECT * FROM professor;
+
+SELECT * FROM student_address;
+
+SELECT * FROM  student_education_history;
+
+SELECT * FROM student_emergency_contact;
+
+SELECT * FROM student_info;
+
+SELECT * FROM student_skills;
+
+SELECT * FROM student_u_d;
+
+SELECT * FROM student_final_project;
+
+SELECT * FROM comment;

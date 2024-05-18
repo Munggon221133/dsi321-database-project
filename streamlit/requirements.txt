@@ -1,0 +1,14 @@
+streamlit
+pandas
+psycopg2
+keyboard
+sqlalchemy
+matplotlib
+seaborn
+streamlit-option-menu
+pygwalker
+toml
+appdirs
+SQLALchemy
+plotly
+plotly-express
