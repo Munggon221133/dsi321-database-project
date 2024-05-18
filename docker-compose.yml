@@ -32,7 +32,7 @@ services:
   jupyter:
     image: jupyter/scipy-notebook:latest
     ports:
-      - "10000:8888"
+      - "8888:8888"
     volumes:
       - ./notebooks:/home/jovyan/work
     environment:
