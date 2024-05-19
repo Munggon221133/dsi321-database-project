@@ -2,6 +2,7 @@ import streamlit as st
 import psycopg2
 import toml
 import pandas as pd
+from io import StringIO
 
 def load_dataframes():
     # Load secrets from the secrets.toml file
@@ -47,6 +48,14 @@ def app():
     # Show selected table
     st.subheader(f"Table: {selected_table}")
     st.write(dataframes[selected_table])
+
+    # Show Info button
+    if st.button("Show Info"):
+        st.write(f"{selected_table} Info:")
+        with StringIO() as buffer:
+            dataframes[selected_table].info(buf=buffer)
+            info_str = buffer.getvalue()
+        st.text(info_str)
 
     # Download dropdown
     st.subheader(f"Download📥: {selected_table}")
