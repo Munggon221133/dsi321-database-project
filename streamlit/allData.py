@@ -57,12 +57,13 @@ def app():
     st.subheader(f"Table: {selected_table}")
     st.write(dataframes[selected_table])
 
-    # Show DataFrame info
-    st.write(f"{selected_table} Info:")
-    with StringIO() as buffer:
-        dataframes[selected_table].info(buf=buffer)
-        info_str = buffer.getvalue()
-    st.text(info_str)
+    # Show Info button
+    if st.button("Show Info"):
+        st.write(f"{selected_table} Info:")
+        with StringIO() as buffer:
+            dataframes[selected_table].info(buf=buffer)
+            info_str = buffer.getvalue()
+        st.text(info_str)
 
     # Download
     st.subheader(f"Download📥: {selected_table}")
